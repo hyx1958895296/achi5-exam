@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    let arr = [11, 2, 3, 4, 5, 6, 8, 98, 45, 25, 8, 4, 2, 8, 42, 3, 45, 5, 85, 56]
+
+    function find(arr) {
+        let res;
+        for (let i = 0; i < arr.length; i++) {
+            rescb = callBack(arr[i]);
+            if (rescb) {
+                res = rescb;
+                break;
+            }
+            return res;
+        }
+        console.log(res);
+    }
+    find(arr);
+
+    function callBack(item) {
+        if (item > 2) {
+            return item;
+        }
+    }
+</script>
+
+</html>
