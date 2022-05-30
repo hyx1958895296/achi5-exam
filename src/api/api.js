@@ -20,6 +20,13 @@ export const getUserInfoApi = function(payload = {}) {
         return axios.post('/user/info', payload, getPostConfig());
     }
     /**
+     * @description 获取用户信息列表
+     * @returns 
+     */
+export const getUserListApi = function(payload = {}) {
+        return axios.post('/user/list', payload, getPostConfig());
+    }
+    /**
      * @description 登录接口
      * @param  payload <object> <username,password,captcha>
      * @param  payload.username   用户名
@@ -130,5 +137,70 @@ export const taskReleaseApi = function(payload = {}) {
  * @returns 
  */
 export const taskListApi = function(payload = {}) {
-    return axios.post("/task/list", payload, getPostConfig());
+        return axios.post("/task/list", payload, getPostConfig());
+    }
+    /**
+     * @description  角色列表接口
+     * @param {*} payload.pagination   是否需要分页  是  true  否  false   非必填
+     * @param {*} payload.pageSize   每页获取几条数据  如果不传 默认是获取10条；非必填
+     * @param {*} payload.pageNum  想获取第几页的数据  如果不传 默认是第1页；非必填
+     * @returns 
+     */
+export const RoleListApi = function(payload = {}) {
+        return axios.post("/role/list", payload, getPostConfig());
+    }
+    /**
+     * @description  查看任务详情接口
+     * @param {*} payload.taskId  任务id
+     * @returns 
+     */
+export const TaskDetailApi = function(payload = {}) {
+        return axios.post("/task/detail", payload, getPostConfig());
+    }
+    /**
+     * @description  创建角色接口
+     * @param {*} payload.idroleName    //角色名字 
+     * @param     payload.groupId  //分组id  非必填
+     * @returns 
+     */
+export const CreateRoleApi = function(payload = {}) {
+        return axios.post("/role/create", payload, getPostConfig());
+    }
+    /**
+     * @description  创建角色组接口
+     * @param    payload.groupName  :<string>, //分组名字
+     * @returns 
+     */
+export const CreateRoleGroupApi = function(payload = {}) {
+        return axios.post("/roleGroup/create", payload, getPostConfig());
+    }
+    /**
+     * @description  角色列表接口
+     * @param {*} payload.pagination   是否需要分页  是  true  否  false   非必填
+     * @param {*} payload.pageSize   每页获取几条数据  如果不传 默认是获取10条；非必填
+     * @param {*} payload.pageNum  想获取第几页的数据  如果不传 默认是第1页；非必填
+     * @returns 
+     */
+export const RoleGroupListApi = function(payload = {}) {
+        return axios.post("/roleGroup/list", payload, getPostConfig());
+    }
+    /**
+     * @description  创建评论接口
+     * @param {*} payload.commentContent:<string>, //要评论的内容
+     * @param {*} payload.taskId:<number> //要评论任务的id
+     * @param {*} payload.userId:<number> //评论的用户id  是谁评论的
+     * @returns 
+     */
+export const CreateComment = function(payload = {}) {
+        return axios.post("/comment/create", payload, getPostConfig());
+    }
+    /**
+     * @description  获取评论列表接口
+     * @param {*} payload.pagination   是否需要分页  是  true  否  false   非必填
+     * @param {*} payload.pageSize   每页获取几条数据  如果不传 默认是获取10条；非必填
+     * @param {*} payload.pageNum  想获取第几页的数据  如果不传 默认是第1页；非必填
+     * @returns 
+     */
+export const CommentList = function(payload = {}) {
+    return axios.post("/comment/list", payload, getPostConfig());
 }

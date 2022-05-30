@@ -118,6 +118,7 @@
 <script>
 import citydata from "@/js/citydata.json";
 import { updateUserInfoApi, getUserInfoApi } from "@/api/api";
+console.log(citydata);
 export default {
   data() {
     return {
@@ -136,20 +137,16 @@ export default {
       city: [], //市列表
       area: [], //县列表
       value: "",
-      params: {},
     };
   },
   watch: {
     "information.proviceCode": function (code) {
       var res = this.province.find((item) => item.code == code);
       this.city = res && res.children ? res.children : [];
-      this.information.cityCode = "";
-      this.information.areaCode = "";
     },
     "information.cityCode": function (code) {
       var res = this.city.find((item) => item.code == code);
       this.area = res && res.children ? res.children : [];
-      this.information.areaCode = "";
     },
   },
   created() {
@@ -159,7 +156,7 @@ export default {
   methods: {
     //修改用户信息
     async updateUserInfo() {
-      this.params = {
+      const params = {
         phone: this.information.phoneInp,
         email: this.information.emailInp,
         sex: this.information.sex,
@@ -171,7 +168,7 @@ export default {
         townNo: "",
         desc: this.information.textarea,
       };
-      let updateRes = await updateUserInfoApi(this.params);
+      let updateRes = await updateUserInfoApi(params);
       if (updateRes.status == 1) {
         this.$message({
           type: "success",
@@ -190,9 +187,9 @@ export default {
       this.information.phoneInp = data.phone;
       this.information.emailInp = data.email;
       this.information.textarea = data.desc;
-      this.province = data.provinceNo;
-      this.city = data.cityNo; //130400  邯郸市
-      this.area = data.areaNo;
+      this.information.proviceCode = data.provinceNo;
+      this.information.cityCode = data.cityNo;
+      this.information.areaCode = data.areaNo;
       if (getRes.status == 1) {
         this.$message({
           type: "success",

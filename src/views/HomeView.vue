@@ -1,5 +1,5 @@
 <template>
-<!-- git@github.com:hyx1958895296/aich5-vue-cms.git -->
+  <!-- git@github.com:hyx1958895296/aich5-vue-cms.git -->
   <div class="home">
     <el-container>
       <el-header>
@@ -36,13 +36,13 @@
         </div>
       </el-header>
       <el-container>
-        <el-aside>
+        <el-aside style="width:220px">
           <el-menu
             default-active="1"
             class="el-menu-vertical-demo"
+            background-color="#0b1b34"
             @open="handleOpen"
             @close="handleClose"
-            background-color="#0b1b34"
             text-color="#fff"
             active-text-color="#ffd04b"
           >
@@ -78,7 +78,9 @@
                 <el-menu-item index="2-2">修改头像</el-menu-item>
                 <el-menu-item index="2-3">修改密码</el-menu-item>
                 <el-menu-item index="2-4">账号绑定</el-menu-item>
-                <el-menu-item index="2-5">日历</el-menu-item>
+                <el-menu-item index="2-5" @click="navigator('worker')"
+                  >聊天页面</el-menu-item
+                >
               </el-menu-item-group>
             </el-submenu>
             <el-submenu index="4">
@@ -87,11 +89,24 @@
                 <span>任务中心</span>
               </template>
               <el-menu-item-group>
-                <el-menu-item index="2-1" @click="navigator('worker')"
-                  >聊天页面</el-menu-item
+                <el-menu-item index="3-2" @click="navigator('taskCreate')"
+                  >创建任务</el-menu-item
                 >
-                <el-menu-item index="2-2">修改头像</el-menu-item>
-                <el-menu-item index="2-3">修改密码</el-menu-item>
+                <el-menu-item index="3-3" @click="navigator('taskList')"
+                  >查看任务列表</el-menu-item
+                >
+                <el-menu-item index="3-4" @click="navigator('taskDetail')"
+                  >任务详情</el-menu-item
+                >
+                <el-menu-item index="3-5" @click="navigator('createrole')"
+                  >创建角色</el-menu-item
+                >
+                <el-menu-item index="3-6" @click="navigator('roleList')"
+                  >角色列表</el-menu-item
+                >
+                <el-menu-item index="3-7" @click="navigator('rolemanager')"
+                  >角色管理</el-menu-item
+                >
               </el-menu-item-group>
             </el-submenu>
           </el-menu>
