@@ -9,9 +9,9 @@
       <el-button size="medium">中等按钮</el-button>
     </div>
     <div v-for="(item, index) in detailTask" :key="index">
-      <div>创建任务人的名称：{{ item.taskName }}</div>
-      <div>创建任务时间：{{ item.createdAt }}</div>
-      <div class="assign-get-person">
+      <div class="pd-20">创建任务的名称：{{ item.taskName }}</div>
+      <div class="pd-20">创建任务时间：{{ item.createdAt }}</div>
+      <div class="assign-get-person pd-20">
         <div>全部领取过任务的人：</div>
         <div
           class="assign-get-person-list"
@@ -21,11 +21,22 @@
           {{ list.userName }}
         </div>
       </div>
-      <div>全部 只看日志 只看评论</div>
-      <div></div>
-      <div></div>
-      <div></div>
+      <div class="pd-20">全部 只看日志 只看评论</div>
+      <div class="pd-20">{{ item.userName }}：{{ item.createdAt }}</div>
+      <div class="pd-20">{{ item.userName }}任务发布给了：</div>
+      <div class="pd-20" v-for="(nav, index) in item.receivedData" :key="index">
+        <div>{{ nav.userName }}</div>
+      </div>
+      <div class="pd-20">创建成功</div>
     </div>
+    <el-input
+      type="textarea"
+      :rows="2"
+      placeholder="请输入内容"
+      v-model="textarea"
+    >
+    </el-input>
+    <el-button class="mg-20" type="info">信息按钮</el-button>
   </div>
 </template>
 
@@ -35,6 +46,7 @@ export default {
   data() {
     return {
       detailTask: [],
+      textarea: "",
     };
   },
   methods: {
@@ -54,6 +66,7 @@ export default {
 <style lang="scss" scoped>
 .task-detail {
   padding: 20px;
+  color: black;
   & .title {
     color: black;
   }
@@ -69,3 +82,5 @@ export default {
   }
 }
 </style>
+
+

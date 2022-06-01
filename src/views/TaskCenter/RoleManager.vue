@@ -13,7 +13,7 @@
             class="aside-top align-center"
             style="border-right: 1px solid #ebeff1"
           >
-            <div class="col-blue align-center">
+            <div class="col-blue align-center" @click="navigator('createrole')">
               <span class="el-icon-user pl-20"></span>
               <div class="ml-5">新增角色</div>
             </div>
@@ -36,9 +36,6 @@
                 </template>
                 <el-menu-item-group>
                   <el-menu-item index="1-1">所有者</el-menu-item>
-                  <el-menu-item index="1-2">管理员</el-menu-item>
-                  <el-menu-item index="1-3">部门主管</el-menu-item>
-                  <el-menu-item index="1-4">成员</el-menu-item>
                 </el-menu-item-group>
               </el-submenu>
               <el-submenu index="2">
@@ -328,6 +325,13 @@ export default {
     },
     handleClick(tab, event) {
       console.log(tab, event);
+    },
+
+    navigator(name) {
+      if (this.$router.currentRoute.name == name) return;
+      this.$router.push({
+        name: name,
+      });
     },
   },
 };

@@ -124,7 +124,6 @@ export default {
       });
       console.log(res);
       sessionStorage.setItem("taskId", taskId);
-      console.log("我是废物");
       this.$router.push("/taskDetail")
     },
     jumpTaskDetail() {

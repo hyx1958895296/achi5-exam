@@ -15,10 +15,7 @@
           <div class="label">PASSWORD</div>
           <el-input v-model="password" clearable show-password></el-input>
         </div>
-        <div class="mt-10 verification">
-          <el-input v-model="captcha"></el-input>
-          <img @click="getCaptcha()" :src="captchaSrc" alt="" />
-        </div>
+        <captchaComponent  @change-captch="changeVal"></captchaComponent>
         <div class="flex-between jump mt-10">
           <div class="lost-password">忘记密码</div>
           <div class="sign-in" @click="navigator('register')">
@@ -157,7 +154,8 @@
 //点击验证码更新验证码
 //把验证码的src变成一个变量
 //src地址变了，然后就会重新拿到验证码
-import { loginApi, getCaptchaApi } from "@/api/api";
+import captchaComponent from "@/components/captchaComponent.vue";
+import { loginApi } from "@/api/api";
 import { encrypt } from "@/assets/utils/util";
 export default {
   data() {
@@ -170,6 +168,9 @@ export default {
   },
   methods: {
     //检查用户名和密码，如果校验成功，返回true，检验失败，返回false
+    changeVal(val){
+      this.captcha = val;
+    },
     getValidateResult() {
       var res = {
         result: true,
@@ -194,7 +195,6 @@ export default {
         this.submit(); //登录方法
       }
     },
-
     async submit() {
       //校验input框里的值是否符合要求
       var isValidate = this.getValidateResult();
@@ -220,7 +220,7 @@ export default {
           type: "warning",
           message: "res.data.msg",
         });
-        this.getCaptcha();
+        // this.getCaptcha();
       }
     },
     navigator(name) {
@@ -229,11 +229,11 @@ export default {
         name: name,
       });
     },
-    getCaptcha() {
-      //这里面有一个缓存的概念
-      this.captchaSrc = getCaptchaApi();
-    },
   },
+  components: {
+    captchaComponent,
+  },
+
   mounted() {
     //绑定监听事件
     window.addEventListener("keydown", this.keyDown);

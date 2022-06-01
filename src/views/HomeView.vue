@@ -99,16 +99,20 @@
                   >任务详情</el-menu-item
                 >
                 <el-menu-item index="3-5" @click="navigator('createrole')"
-                  >创建角色</el-menu-item
+                  >新增角色</el-menu-item
                 >
                 <el-menu-item index="3-6" @click="navigator('roleList')"
                   >角色列表</el-menu-item
                 >
                 <el-menu-item index="3-7" @click="navigator('rolemanager')"
-                  >角色管理</el-menu-item
+                  >权限管理</el-menu-item
                 >
               </el-menu-item-group>
             </el-submenu>
+              <el-menu-item index="2" @click="navigator('shengview')">
+              <i class="el-icon-setting"></i>
+              <span slot="title">省市级联</span>
+            </el-menu-item>
           </el-menu>
         </el-aside>
         <el-main class="clear-style">

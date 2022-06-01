@@ -31,11 +31,13 @@
       >
       </el-option>
     </el-select>
+    <asdfasd></asdfasd>
   </div>
 </template>
 
 <script>
 import data from "@/js/citydata.json";
+import asdfasd from "@/components/captchaComponent.vue";
 export default {
   data() {
     return {
@@ -46,6 +48,9 @@ export default {
       value2: "",
       value3: "",
     };
+  },
+  components: {
+    asdfasd,
   },
   methods: {
     checkSheng(code) {
@@ -70,10 +75,10 @@ export default {
     value1: function (val) {
       this.value1 = val;
       this.value2 = "";
-     this.checkSheng(val);
+      this.checkSheng(val);
     },
     value2: function (val) {
-        this.value2 = val;
+      this.value2 = val;
       this.value3 = "";
       this.checkShi(val);
     },

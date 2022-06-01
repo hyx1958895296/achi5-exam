@@ -64,8 +64,7 @@
               clearable
             ></el-input>
             <div class="flex-center mt-10">
-              <el-input placeholder="请输入验证码" v-model="captcha"></el-input>
-              <img @click="getCaptcha()" :src="captchaSrc" alt="" />
+              <captchaComponent></captchaComponent>
             </div>
             <el-button @click="regJump" type="primary" class="btn mt-20"
               >注册</el-button
@@ -85,6 +84,7 @@
 <script>
 import { loginApi, registerApi, getCaptchaApi } from "@/api/api";
 import { encrypt } from "@/assets/utils/util";
+import captchaComponent from "@/components/captchaComponent.vue";
 export default {
   data() {
     return {
@@ -172,6 +172,9 @@ export default {
         });
       }
     },
+  },
+  components: {
+    captchaComponent,
   },
   getCaptcha() {
     //这里面有一个缓存的概念
