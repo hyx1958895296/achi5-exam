@@ -63,8 +63,12 @@
               v-model="name"
               clearable
             ></el-input>
-            <div class="flex-center mt-10">
-              <captchaComponent></captchaComponent>
+            <!-- <div class="flex-center mt-10"> -->
+            <!-- <captchaComponent></captchaComponent> -->
+            <!-- </div> -->
+            <div class="mt-10 verification">
+              <el-input v-model="captcha"></el-input>
+              <img @click="getCaptcha()" :src="captchaSrc" alt="" />
             </div>
             <el-button @click="regJump" type="primary" class="btn mt-20"
               >注册</el-button
@@ -84,7 +88,7 @@
 <script>
 import { loginApi, registerApi, getCaptchaApi } from "@/api/api";
 import { encrypt } from "@/assets/utils/util";
-import captchaComponent from "@/components/captchaComponent.vue";
+// import captchaComponent from "@/components/captchaComponent.vue";
 export default {
   data() {
     return {
@@ -168,14 +172,17 @@ export default {
         //注册失败
         this.$message({
           type: "warning",
-          message: res.data.msg,
+          message: res.data.data.msg,
         });
       }
     },
+    // changeVal(val) {
+    //   this.captcha = val;
+    // },
   },
-  components: {
-    captchaComponent,
-  },
+  // components: {
+  //   captchaComponent,
+  // },
   getCaptcha() {
     //这里面有一个缓存的概念
     this.captchaSrc = getCaptchaApi();
@@ -204,6 +211,11 @@ export default {
       height: 100%;
       border: #fff;
       padding: 60px 27%;
+      & .verification {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
       & .steps {
         width: 100%;
       }

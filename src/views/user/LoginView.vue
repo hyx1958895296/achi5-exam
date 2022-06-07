@@ -15,10 +15,13 @@
           <div class="label">PASSWORD</div>
           <el-input v-model="password" clearable show-password></el-input>
         </div>
-        <captchaComponent  @change-captch="changeVal"></captchaComponent>
+        <div class="mt-10 verification">
+          <el-input v-model="captcha"></el-input>
+          <img @click="getCaptcha()" :src="captchaSrc" alt="" />
+        </div>
         <div class="flex-between jump mt-10">
           <div class="lost-password">忘记密码</div>
-          <div class="sign-in" @click="navigator('register')">
+          <div class="sign-in" @click="$navigator('register')">
             没有账号？创建一个
           </div>
         </div>
@@ -96,66 +99,8 @@
 }
 </style>
 <script>
-//登录 功能中的工作流程
-//用户点击登录按钮
-//校验input框里的值是否符合要求
-//如果符合要求，就调用服务端接口
-//服务端如果校验成功
-//就会给你返回一个token
-
-//如果前端校验不成功，就提示用户对应的一个消息
-//比如：用户名输入不符合规范；密码长度在6~15位；
-
-// axios的安装
-
-//常用的axios方法
-// axios.get();
-// axios.post();
-// 什么时候使用get？什么时候使用post？
-// 看接口文档
-// 接口是什么类型：get, post
-// 第一个参数   接口名
-// 第二个参数   服务端要的数据（json数据或数组）
-
-//接口文档
-//在工作中，是服务端写的一个接口文档，在GitHub中wiki下面写接口文档
-//接口文档   会告诉你  访问的地址  访问类型   写接口的目的  入参  出参
-
-//跨域
-//协议  域名  端口号  有任何一个不相同，就认为是跨域
-// http://www.baidu.com
-//协议：http
-//域名：www.baidu.com
-//端口号：8080
-
-//如果网址的端口号是80的话可以不写
-//http://www.baidu.com:8080/user/login
-
-//跨域是在浏览器中http中的一个协议；
-//目前在这个市场上，几乎所有的项目是前后端分离
-//前端是前端的项目，后端的项目是后端的项目
-//100%会造成跨域
-//如果是生产环境，服务端解决这个问题
-
-//在开发时，都是前端自己解决
-//解决方法：vue.config.js   来解决跨域问题
-
-//验证码：
-
-//注意：如果说接口中以get方式请求，一般情况下，如果这个接口返回的是一个文件，或者是一个图片
-//文件是  css   js   html   txt  exls  png
-//通常都是get请求
-//我们不需要用axios
-//直接写一个图片就可以
-
-// 总结：验证码，图片，静态资源文件可以直接调用，而不需要用到axios.get('/captcha').then(res)
-
-//解决验证码不会自动刷新的问题
-//点击验证码更新验证码
-//把验证码的src变成一个变量
-//src地址变了，然后就会重新拿到验证码
-import captchaComponent from "@/components/captchaComponent.vue";
-import { loginApi } from "@/api/api";
+// import captchaComponent from "@/components/captchaComponent.vue";
+import { loginApi, getCaptchaApi } from "@/api/api";
 import { encrypt } from "@/assets/utils/util";
 export default {
   data() {
@@ -168,9 +113,9 @@ export default {
   },
   methods: {
     //检查用户名和密码，如果校验成功，返回true，检验失败，返回false
-    changeVal(val){
-      this.captcha = val;
-    },
+    // changeVal(val) {
+    //   this.captcha = val;
+    // },
     getValidateResult() {
       var res = {
         result: true,
@@ -218,21 +163,19 @@ export default {
         //登录失败
         this.$message({
           type: "warning",
-          message: "res.data.msg",
+          message: res.data.msg,
         });
-        // this.getCaptcha();
+        this.getCaptcha();
       }
     },
-    navigator(name) {
-      if (this.$router.currentRoute.name == name) return;
-      this.$router.push({
-        name: name,
-      });
+    getCaptcha() {
+      //这里面有一个缓存的概念
+      this.captchaSrc = getCaptchaApi();
     },
   },
-  components: {
-    captchaComponent,
-  },
+  // components: {
+  //   captchaComponent,
+  // },
 
   mounted() {
     //绑定监听事件

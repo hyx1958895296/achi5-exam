@@ -180,7 +180,7 @@ export default {
     //获取用户信息
     async getUserInfo() {
       let getRes = await getUserInfoApi();
-      let data = getRes.data.data[0];
+      let data = getRes.data.data;
       this.information.accountInp = data.avatarName;
       this.information.nameInp = data.name;
       this.information.sex = data.sex;

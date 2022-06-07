@@ -11,7 +11,7 @@ export default {
   data() {
     return {
       captchaSrc: "/api/captcha",
-      captcha:'',
+      captcha: "",
     };
   },
   methods: {
@@ -19,8 +19,8 @@ export default {
       //这里面有一个缓存的概念
       this.captchaSrc = getCaptchaApi();
     },
-    changeCaptcha(){
-      this.$emit('change-captch',this.captcha);
+    changeCaptcha() {
+      this.$emit("change-captch", this.captcha);
     },
   },
 };

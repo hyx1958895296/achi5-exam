@@ -13,7 +13,7 @@
             class="aside-top align-center"
             style="border-right: 1px solid #ebeff1"
           >
-            <div class="col-blue align-center" @click="navigator('createrole')">
+            <div class="col-blue align-center" @click="$navigator('createrole')">
               <span class="el-icon-user pl-20"></span>
               <div class="ml-5">新增角色</div>
             </div>
@@ -24,54 +24,23 @@
           </div>
           <div class="aside-bottom">
             <el-menu
-              default-active="2"
+              :default-active="defaultActive"
               class="el-menu-vertical-demo"
               @open="handleOpen"
               @close="handleClose"
             >
-              <el-submenu index="1">
+              <el-submenu :index="item.key" v-for="item in menu" :key="item.id">
                 <template slot="title">
                   <i class="el-icon-location"></i>
-                  <span>默认</span>
+                  <span>{{ item.groupName }}</span>
                 </template>
-                <el-menu-item-group>
-                  <el-menu-item index="1-1">所有者</el-menu-item>
-                </el-menu-item-group>
-              </el-submenu>
-              <el-submenu index="2">
-                <template slot="title">
-                  <i class="el-icon-location"></i>
-                  <span>职务</span>
-                </template>
-                <el-menu-item-group>
-                  <el-menu-item index="2-1">所有者</el-menu-item>
-                  <el-menu-item index="2-2">管理员</el-menu-item>
-                  <el-menu-item index="2-3">部门主管</el-menu-item>
-                  <el-menu-item index="2-4">成员</el-menu-item>
-                </el-menu-item-group>
-              </el-submenu>
-              <el-submenu index="3">
-                <template slot="title">
-                  <i class="el-icon-location"></i>
-                  <span>总监</span>
-                </template>
-                <el-menu-item-group>
-                  <el-menu-item index="3-1">所有者</el-menu-item>
-                  <el-menu-item index="3-2">管理员</el-menu-item>
-                  <el-menu-item index="3-3">部门主管</el-menu-item>
-                  <el-menu-item index="3-4">成员</el-menu-item>
-                </el-menu-item-group>
-              </el-submenu>
-              <el-submenu index="4">
-                <template slot="title">
-                  <i class="el-icon-location"></i>
-                  <span>区域</span>
-                </template>
-                <el-menu-item-group>
-                  <el-menu-item index="4-1">所有者</el-menu-item>
-                  <el-menu-item index="4-2">管理员</el-menu-item>
-                  <el-menu-item index="4-3">部门主管</el-menu-item>
-                  <el-menu-item index="4-4">成员</el-menu-item>
+                <el-menu-item-group
+                  :index="children.key"
+                  v-for="children in item.children"
+                  :key="children.key"
+                >
+                  <el-menu-item index="1-1">选项1</el-menu-item>
+                  <el-menu-item index="1-2">选项2</el-menu-item>
                 </el-menu-item-group>
               </el-submenu>
             </el-menu>
@@ -310,11 +279,17 @@
 </template>
 
 <script>
+import { RoleGroupListApi, RoleListApi } from "@/api/api";
 export default {
   data() {
     return {
       activeName: "",
+      defaultActive: "",
+      menu: [],
     };
+  },
+  created() {
+    this.getMenuList();
   },
   methods: {
     handleOpen(key, keyPath) {
@@ -326,12 +301,30 @@ export default {
     handleClick(tab, event) {
       console.log(tab, event);
     },
+    async getMenuList() {
+      let [roleListResult, roleGroupListResult] = await Promise.all([
+        RoleGroupListApi(),
+        RoleListApi(),
+      ]);
+      let roleList = roleListResult.data.data.rows;
+      let roleGroupList = roleGroupListResult.data.data.rows;
+      roleGroupList.forEach((group) => {
+        group.key = `group${group.id}`;
 
-    navigator(name) {
-      if (this.$router.currentRoute.name == name) return;
-      this.$router.push({
-        name: name,
+        group.children = (() => {
+          let res = [];
+          roleList.forEach((role) => {
+            if (role.groupId == group.id) {
+              role.key=`role${role.id}`
+              res.push(role);
+            }
+          });
+          return res;
+        })();
       });
+      console.log(roleGroupList);
+      this.menu = roleGroupList;
+      this.defaultActive = roleGroupList[0].children[0].key;
     },
   },
 };

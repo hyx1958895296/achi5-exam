@@ -112,7 +112,7 @@ export default {
     async getInfo() {
       let res = await getUserInfoApi();
       if (res.data.status == 1) {
-        this.info = res.data.data[0];
+        this.info = res.data.data;
         this.obj.id = this.info.id;
       }
       console.log(res);

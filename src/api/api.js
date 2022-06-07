@@ -1,15 +1,36 @@
 //api.js就是存放服务端的接口的
 import axios from 'axios';
 
+// 添加请求拦截器
+axios.interceptors.request.use(function(config) {
+    // 在发送请求之前做些什么
+    config.headers.authorization = sessionStorage.getItem('token');
+    return config;
+}, function(error) {
+    // 对请求错误做些什么
+    return Promise.reject(error);
+});
+
+// 添加响应拦截器
+axios.interceptors.response.use(function(response) {
+    if (response.data.status == 401) {
+        window.location.href = '/'
+    }
+    // 对响应数据做点什么
+    return response;
+}, function(error) {
+    // 对响应错误做点什么
+    return Promise.reject(error);
+});
+
+
 const baseURL = '/api';
 
-const getPostConfig = function() {
-        return {
-            baseURL,
-            headers: {
-                contentType: 'application/json',
-                authorization: sessionStorage.getItem("token"),
-            }
+const postConfig = {
+        baseURL,
+        headers: {
+            contentType: 'application/json',
+            authorization: sessionStorage.getItem("token"),
         }
     }
     /**
@@ -17,14 +38,14 @@ const getPostConfig = function() {
      * @returns 
      */
 export const getUserInfoApi = function(payload = {}) {
-        return axios.post('/user/info', payload, getPostConfig());
+        return axios.post('/user/info', payload, postConfig);
     }
     /**
      * @description 获取用户信息列表
      * @returns 
      */
 export const getUserListApi = function(payload = {}) {
-        return axios.post('/user/list', payload, getPostConfig());
+        return axios.post('/user/list', payload, postConfig);
     }
     /**
      * @description 登录接口
@@ -35,14 +56,14 @@ export const getUserListApi = function(payload = {}) {
      * @returns 
      */
 export const loginApi = function(payload = {}) {
-    return axios.post("/user/login", payload, getPostConfig());
+    return axios.post("/user/login", payload, postConfig);
 }
 
 /**
  * @description 注册接口
  */
 export const registerApi = function(payload = {}) {
-        return axios.post("/user/register", payload, getPostConfig());
+        return axios.post("/user/register", payload, postConfig);
     }
     /**
      * @description 退出登陆接口
@@ -50,7 +71,7 @@ export const registerApi = function(payload = {}) {
      * @returns 
      */
 export const logoutApi = function(payload = {}) {
-        return axios.post("/user/logout", payload, getPostConfig());
+        return axios.post("/user/logout", payload, postConfig);
     }
     /**
      * @description 验证码接口
@@ -64,7 +85,7 @@ export const getCaptchaApi = function() {
      * @returns 
      */
 export const addTopicApi = function(payload = {}) {
-        return axios.post("/question/create", payload, getPostConfig());
+        return axios.post("/question/create", payload, postConfig);
     }
     /**
      * @description  查询题目
@@ -72,7 +93,7 @@ export const addTopicApi = function(payload = {}) {
      * @returns 
      */
 export const queryQuestionApi = function(payload = {}) {
-        return axios.post("/question/list", payload, getPostConfig());
+        return axios.post("/question/list", payload, postConfig);
     }
     /**
      * @description  修改题目
@@ -80,7 +101,7 @@ export const queryQuestionApi = function(payload = {}) {
      * @returns 
      */
 export const updataQuestionApi = function(payload = {}) {
-        return axios.post("/question/update", payload, getPostConfig());
+        return axios.post("/question/update", payload, postConfig);
     }
     /**
      * @description  删除题目
@@ -88,7 +109,7 @@ export const updataQuestionApi = function(payload = {}) {
      * @returns 
      */
 export const deleteQuestionApi = function(payload = {}) {
-        return axios.post("/question/delete", payload, getPostConfig());
+        return axios.post("/question/delete", payload, postConfig);
     }
     /**
      * @description  修改个人信息接口
@@ -105,7 +126,7 @@ export const deleteQuestionApi = function(payload = {}) {
      * @returns 
      */
 export const updateUserInfoApi = function(payload = {}) {
-        return axios.post("/user/update", payload, getPostConfig());
+        return axios.post("/user/update", payload, postConfig);
     }
     /**
      * @description  创建任务接口
@@ -116,7 +137,7 @@ export const updateUserInfoApi = function(payload = {}) {
      * @returns 
      */
 export const taskCreateApi = function(payload = {}) {
-    return axios.post("/task/create", payload, getPostConfig());
+    return axios.post("/task/create", payload, postConfig);
 }
 
 /**
@@ -126,7 +147,7 @@ export const taskCreateApi = function(payload = {}) {
  * @returns 
  */
 export const taskReleaseApi = function(payload = {}) {
-    return axios.post("/task/release", payload, getPostConfig());
+    return axios.post("/task/release", payload, postConfig);
 }
 
 /**
@@ -137,7 +158,7 @@ export const taskReleaseApi = function(payload = {}) {
  * @returns 
  */
 export const taskListApi = function(payload = {}) {
-        return axios.post("/task/list", payload, getPostConfig());
+        return axios.post("/task/list", payload, postConfig);
     }
     /**
      * @description  角色列表接口
@@ -147,7 +168,7 @@ export const taskListApi = function(payload = {}) {
      * @returns 
      */
 export const RoleListApi = function(payload = {}) {
-        return axios.post("/role/list", payload, getPostConfig());
+        return axios.post("/role/list", payload, postConfig);
     }
     /**
      * @description  查看任务详情接口
@@ -155,7 +176,7 @@ export const RoleListApi = function(payload = {}) {
      * @returns 
      */
 export const TaskDetailApi = function(payload = {}) {
-        return axios.post("/task/detail", payload, getPostConfig());
+        return axios.post("/task/detail", payload, postConfig);
     }
     /**
      * @description  创建角色接口
@@ -164,7 +185,7 @@ export const TaskDetailApi = function(payload = {}) {
      * @returns 
      */
 export const CreateRoleApi = function(payload = {}) {
-        return axios.post("/role/create", payload, getPostConfig());
+        return axios.post("/role/create", payload, postConfig);
     }
     /**
      * @description  创建角色组接口
@@ -172,7 +193,7 @@ export const CreateRoleApi = function(payload = {}) {
      * @returns 
      */
 export const CreateRoleGroupApi = function(payload = {}) {
-        return axios.post("/roleGroup/create", payload, getPostConfig());
+        return axios.post("/roleGroup/create", payload, postConfig);
     }
     /**
      * @description  角色列表接口
@@ -182,7 +203,7 @@ export const CreateRoleGroupApi = function(payload = {}) {
      * @returns 
      */
 export const RoleGroupListApi = function(payload = {}) {
-        return axios.post("/roleGroup/list", payload, getPostConfig());
+        return axios.post("/roleGroup/list", payload, postConfig);
     }
     /**
      * @description  创建评论接口
@@ -192,7 +213,7 @@ export const RoleGroupListApi = function(payload = {}) {
      * @returns 
      */
 export const CreateComment = function(payload = {}) {
-        return axios.post("/comment/create", payload, getPostConfig());
+        return axios.post("/comment/create", payload, postConfig);
     }
     /**
      * @description  获取评论列表接口
@@ -202,5 +223,5 @@ export const CreateComment = function(payload = {}) {
      * @returns 
      */
 export const CommentList = function(payload = {}) {
-    return axios.post("/comment/list", payload, getPostConfig());
+    return axios.post("/comment/list", payload, postConfig);
 }

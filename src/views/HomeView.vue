@@ -36,7 +36,7 @@
         </div>
       </el-header>
       <el-container>
-        <el-aside style="width:220px">
+        <el-aside style="width: 220px">
           <el-menu
             default-active="1"
             class="el-menu-vertical-demo"
@@ -54,7 +54,7 @@
               <el-menu-item-group>
                 <el-menu-item index="1-1">HTML题库</el-menu-item>
                 <el-menu-item index="1-2">CSS题库</el-menu-item>
-                <el-menu-item index="1-3" @click="navigator('jsquestionbank')"
+                <el-menu-item index="1-3" @click="$navigator('jsquestionbank')"
                   >JS题库</el-menu-item
                 >
                 <el-menu-item index="1-4">VUE题库</el-menu-item>
@@ -62,7 +62,7 @@
                 <el-menu-item index="1-6">mini program题库</el-menu-item>
               </el-menu-item-group>
             </el-submenu>
-            <el-menu-item index="2" @click="navigator('about')">
+            <el-menu-item index="2" @click="$navigator('about')">
               <i class="el-icon-setting"></i>
               <span slot="title">刷题系统</span>
             </el-menu-item>
@@ -72,13 +72,13 @@
                 <span>账号设置</span>
               </template>
               <el-menu-item-group>
-                <el-menu-item index="2-1" @click="navigator('personaldetail')"
+                <el-menu-item index="2-1" @click="$navigator('personaldetail')"
                   >个人信息</el-menu-item
                 >
                 <el-menu-item index="2-2">修改头像</el-menu-item>
                 <el-menu-item index="2-3">修改密码</el-menu-item>
                 <el-menu-item index="2-4">账号绑定</el-menu-item>
-                <el-menu-item index="2-5" @click="navigator('worker')"
+                <el-menu-item index="2-5" @click="$navigator('worker')"
                   >聊天页面</el-menu-item
                 >
               </el-menu-item-group>
@@ -89,27 +89,27 @@
                 <span>任务中心</span>
               </template>
               <el-menu-item-group>
-                <el-menu-item index="3-2" @click="navigator('taskCreate')"
+                <el-menu-item index="3-2" @click="$navigator('taskCreate')"
                   >创建任务</el-menu-item
                 >
-                <el-menu-item index="3-3" @click="navigator('taskList')"
+                <el-menu-item index="3-3" @click="$navigator('taskList')"
                   >查看任务列表</el-menu-item
                 >
-                <el-menu-item index="3-4" @click="navigator('taskDetail')"
+                <el-menu-item index="3-4" @click="$navigator('taskDetail')"
                   >任务详情</el-menu-item
                 >
-                <el-menu-item index="3-5" @click="navigator('createrole')"
+                <el-menu-item index="3-5" @click="$navigator('createrole')"
                   >新增角色</el-menu-item
                 >
-                <el-menu-item index="3-6" @click="navigator('roleList')"
+                <el-menu-item index="3-6" @click="$navigator('roleList')"
                   >角色列表</el-menu-item
                 >
-                <el-menu-item index="3-7" @click="navigator('rolemanager')"
+                <el-menu-item index="3-7" @click="$navigator('rolemanager')"
                   >权限管理</el-menu-item
                 >
               </el-menu-item-group>
             </el-submenu>
-              <el-menu-item index="2" @click="navigator('shengview')">
+            <el-menu-item index="2" @click="$navigator('shengview')">
               <i class="el-icon-setting"></i>
               <span slot="title">省市级联</span>
             </el-menu-item>
@@ -188,7 +188,9 @@ export default {
   },
   async created() {
     let res = await getUserInfoApi();
-    this.username = res.data.data[0].phone;
+    console.log(res);
+    this.username = res.data.data.phone;
+    // console.log(this.username);
     if (res.data.status == 401) {
       this.$router.push("/login");
     }
@@ -201,17 +203,11 @@ export default {
       console.log(key, keyPath);
     },
 
-    navigator(name) {
-      if (this.$router.currentRoute.name == name) return;
-      this.$router.push({
-        name: name,
-      });
-    },
     async loginout() {
       let logOutRes = await logoutApi();
       if (logOutRes.status == 200) {
         sessionStorage.removeItem("token");
-        this.navigator("login");
+        this.$router.push("/");
       }
     },
   },

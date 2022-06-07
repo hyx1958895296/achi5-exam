@@ -74,6 +74,9 @@ import {
   taskReleaseApi,
   getUserInfoApi,
 } from "@/api/api";
+// import Cache from '@/assets/utils/cache'
+// let cache=new Cache();
+
 export default {
   data() {
     return {
@@ -104,7 +107,7 @@ export default {
     },
     async getUserInfo() {
       let res = await getUserInfoApi();
-      this.option = res.data.data[0].id;
+      this.option = res.data.data.id;
       this.params = [this.option];
     },
     async taskList() {
@@ -128,8 +131,8 @@ export default {
     },
     jumpTaskDetail() {
       this.getTask(this.taskId);
-      this.navigator("taskDetail");
-
+      this.$router.push("/taskDetail");
+      // this.$navigator("taskDetail");
     },
     async getTask(taskId) {
       let res = await taskReleaseApi({
@@ -140,12 +143,6 @@ export default {
       if (res.data.status == 1) {
         this.taskList();
       }
-    },
-    navigator(name) {
-      if (this.$router.currentRoute.name == name) return;
-      this.$router.push({
-        name: name,
-      });
     },
   },
   created() {

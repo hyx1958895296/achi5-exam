@@ -64,7 +64,7 @@ const routes = [{
                 path: '/rolemanager',
                 name: 'rolemanager',
                 component: () =>
-                    import ( /* webpackChunkName: "taskDetail" */ '../views/TaskCenter/RoleManager.vue'),
+                    import ( /* webpackChunkName: "taskDetail" */ '../views/TaskCenter/RightsManager.vue'),
             },
             {
                 path: '/createrole',

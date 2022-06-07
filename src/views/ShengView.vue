@@ -32,8 +32,19 @@
       </el-option>
     </el-select>
     <asdfasd></asdfasd>
+    <div class="ml-5 bears flex-between">
+      <div>熊出没</div>
+      <div>神出没</div>
+    </div>
   </div>
 </template>
+
+<style scoped lang="scss">
+.bears{
+  margin-top: 20px;
+  width: 150px;
+}
+</style>
 
 <script>
 import data from "@/js/citydata.json";

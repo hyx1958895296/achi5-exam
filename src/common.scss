@@ -1,0 +1,132 @@
+@mixin ml($distance) {
+    margin-left: $distance;
+}
+
+.ml-5 {
+    @include ml(5px);
+}
+
+.ml-10 {
+    @include ml(10px);
+}
+
+.ml-15 {
+    @include ml(15px);
+}
+
+.ml-20 {
+    @include ml(20px);
+}
+
+@mixin mr($mright) {
+    margin-right: $mright;
+}
+
+.mr-5 {
+    @include mr(5px);
+}
+
+.mr-15 {
+    @include mr(15px);
+}
+
+.mr-10 {
+    @include mr(10px);
+}
+
+.mr-20 {
+    @include mr(20px);
+}
+
+@mixin mt($mtop) {
+    margin-top: $mtop;
+}
+
+.mt-10 {
+    @include mt(10px)
+}
+
+.mt-15 {
+    @include mt(15px)
+}
+
+.mt-20 {
+    @include mt(20px)
+}
+
+.mt-30 {
+    @include mt(30px)
+}
+
+.mg-20 {
+    @include mt(20px)
+}
+
+@mixin flex-content($content) {
+    display: flex;
+    justify-content: $content;
+    align-items: center;
+}
+
+.flex-center {
+    @include flex-content(center);
+}
+
+.flex-between {
+    @include flex-content(space-between);
+}
+
+.flex-column {
+    flex-direction: column;
+    @include flex-content(center);
+}
+
+.flex {
+    display: flex;
+}
+
+.align-center {
+    display: flex;
+    align-items: center;
+}
+
+.bold {
+    font-weight: 900;
+}
+
+.shadow {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
+}
+
+.c-ff4400 {
+    color: #ff4400;
+}
+
+.textalign-r {
+    text-align: right;
+}
+
+.col-font_black {
+    color: black;
+    font-size: 18px;
+    font-weight: 900;
+    padding: 10px 0;
+}
+
+.fz-12 {
+    font-size: 12px;
+}
+
+.grid-center {
+    display: grid;
+    grid-template-columns: 2fr 8fr;
+    padding: 20px;
+}
+
+.pl-20 {
+    padding-left: 20px;
+}
+
+.pd-20 {
+    padding: 20px;
+}
