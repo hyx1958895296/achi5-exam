@@ -34,18 +34,35 @@
             <el-tag type="warning" v-else>未领取</el-tag>
           </template>
         </el-table-column>
+        <!-- <el-table-column label="操作" align="center">
+          <template>
+            <div class="operation">
+              <el-link type="primary" @click="run(row)"
+                >编辑任务</el-link
+              >
+              <el-link type="primary">发布任务</el-link>
+              <el-link type="primary">领取任务</el-link>
+              <el-link type="primary">查看详情</el-link>
+            </div>
+          </template>
+        </el-table-column> -->
 
         <el-table-column label="操作" width="320">
           <template slot-scope="scope">
-            <el-button
-              type="text"
-              @click="handleEdit(scope.$index, scope.row)"
-              size="small"
-            >
+
+            <el-button type="text" @click="run(scope.row)" size="small">
               编辑任务
             </el-button>
-
-            <el-button type="text" size="small"> </el-button>
+            <el-dialog
+              title="修改任务"
+              :visible.sync="dialogVisible"
+              width="50%"
+              :before-close="handleClose"
+            >
+              <task-component :data="selectData"></task-component>
+            </el-dialog>
+            <el-button type="text" size="small">
+            </el-button>
             <el-button
               type="text"
               size="small"
@@ -69,30 +86,16 @@
       >
       </el-pagination>
     </div>
-    <el-dialog
-      title="修改任务"
-      :visible.sync="dialogVisible"
-      width="50%"
-      :before-close="handleClose"
-    >
-      <task-form
-        :data="selectData"
-        ref="update"
-        v-on:submit="onSubmit()"
-      ></task-form>
-    </el-dialog>
   </div>
 </template>
 
 <script>
 import { taskListApi, TaskUpdateApi } from "@/api/api";
-import taskForm from "@/components/taskFormComponent.vue";
-import formatDate from "@/mixins/formatDate";
+import TaskComponent from "@/components/TaskComponent.vue";
 export default {
   components: {
-    taskForm,
+    TaskComponent,
   },
-  mixins: [formatDate],
   data() {
     return {
       tableData: [],
@@ -107,14 +110,10 @@ export default {
     this.taskList();
   },
   methods: {
-    async handleEdit(index, row) {
-      console.log(index, row);
-      this.selectData = row;
-      this.taskId = row.id;
+    run(row) {
+      this.selectData = row; //给selectData赋值
       this.dialogVisible = true;
-      this.$nextTick(function () {
-        this.$refs.update.init();
-      });
+      // console.log("父组件打印", row);
     },
     handleClose(done) {
       this.$confirm("确认关闭？")
@@ -142,24 +141,14 @@ export default {
       this.tableData = res.data.data.rows;
       this.totalCount = res.data.data.count;
     },
-    async onSubmit() {
-      let id = this.selectData.id;
-      let option = this.$refs.update.form;
-      let res = await TaskUpdateApi({
-        id: id,
-        name: option.name,
-        desc: option.desc,
-        duration: option.duration,
-        level: option.level,
+    async taskUpdate() {
+      let res = await taskUpdateApi({
+        id: 565,
+        name: "二臂啊",
+        desc: "二臂啊二臂啊二臂啊",
+        duration: 3,
+        level: 1,
       });
-      if (res.data.status == 1) {
-        this.$message({
-          type: "success",
-          message: "修改成功",
-        });
-        this.dialogVisible = false;
-        this.taskList();
-      }
       console.log(res);
     },
   },

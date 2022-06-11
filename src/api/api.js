@@ -179,6 +179,18 @@ export const TaskDetailApi = function(payload = {}) {
         return axios.post("/task/detail", payload, postConfig);
     }
     /**
+     * 编辑任务接口
+     * @param {*} payload.id       任务id
+     * @param     payload.name     任务名称
+     * @param     payload.desc     任务描述
+     * @param     payload.duration 任务时长
+     * @param     payload.level    任务等级  1：紧急  0：普通任务    任务描述
+     * @returns 
+     */
+export const TaskUpdateApi = function(payload = {}) {
+        return axios.post('/task/update', payload, postConfig)
+    }
+    /**
      * @description  创建角色接口
      * @param {*} payload.idroleName    //角色名字 
      * @param     payload.groupId  //分组id  非必填
