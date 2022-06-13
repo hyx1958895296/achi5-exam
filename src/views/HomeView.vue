@@ -189,7 +189,7 @@ export default {
   async created() {
     let res = await getUserInfoApi();
     console.log(res);
-    this.username = res.data.data.phone;
+    this.username = res.data.data.name;
     // console.log(this.username);
     if (res.data.status == 401) {
       this.$router.push("/login");

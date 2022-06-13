@@ -6,10 +6,17 @@
       </el-form-item>
       <el-form-item label="任务时长">
         <div class="align-center">
-          <el-input class="time" v-model="form.duration"></el-input>
+          <el-input
+            class="time"
+            type="text"
+            step="2"
+            @blur="inputChange"
+            v-model="form.duration"
+          ></el-input>
           <span>小时</span>
         </div>
       </el-form-item>
+      <!-- <input type="text" maxlength="3"> -->
       <el-form-item label="任务说明">
         <el-input type="textarea" v-model="form.desc"></el-input>
       </el-form-item>
@@ -54,9 +61,28 @@ export default {
     this.init();
   },
   methods: {
+    // inputChange() {
+    //   //判断如果输入的是数字的话就赋值来判断颜色，如果不是数字就提示请输入数字
+    //   if (typeof this.form.duration == "number") {
+    //     this.text2 = this.form.duration;
+    //     console.log(this.text2, "text2");  
+    //   } else {
+    //     this.text2 = 0;
+    //     this.$message({
+    //       message: "请输入数字",
+    //       type: "warning",
+    //     });
+    //   }
+    // },
     init() {
       if (this.data != undefined) {
         let { taskName, desc, duration, level } = this.data;
+        if (
+          duration.indexOf(".") != -1 &&
+          duration.subString(duration.indexOf("."), duration.length).length > 2
+        ) {
+          e.keyCode = 0;
+        }
         this.form = {
           name: taskName,
           desc,
@@ -64,8 +90,9 @@ export default {
           level: level == 1 ? true : false,
         };
         this.getTaskDetail();
+      } else {
+        this.getUserList();
       }
-      this.getUserList();
     },
     handleClose(done) {
       this.$confirm("确认关闭？")
@@ -125,6 +152,6 @@ export default {
 
 <style lang="scss" scoped>
 .time {
-  width: 15%;
+  width: 40%;
 }
 </style>

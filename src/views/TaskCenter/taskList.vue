@@ -44,13 +44,12 @@
             >
               编辑任务
             </el-button>
-
             <el-button type="text" size="small"> </el-button>
             <el-button
               type="text"
               size="small"
-              @click="open(scope.row)"
-              v-if="scope.row.isReceived != 1"
+              v-show="scope.row.isReceived == 0"
+              @click="getTask(scope.row.id)"
               >领取任务
             </el-button>
           </template>
@@ -78,14 +77,19 @@
       <task-form
         :data="selectData"
         ref="update"
-        v-on:submit="onSubmit()"
+        v-on:submit="onSubmit"
       ></task-form>
     </el-dialog>
   </div>
 </template>
 
 <script>
-import { taskListApi, TaskUpdateApi } from "@/api/api";
+import {
+  taskListApi,
+  taskReleaseApi,
+  TaskUpdateApi,
+  getUserListApi,
+} from "@/api/api";
 import taskForm from "@/components/taskFormComponent.vue";
 import formatDate from "@/mixins/formatDate";
 export default {
@@ -101,16 +105,19 @@ export default {
       totalCount: 0,
       dialogVisible: false,
       selectData: "",
+      userIdAll: [],
+      params: [],
+      taskId:""
     };
   },
   created() {
     this.taskList();
   },
   methods: {
-    async handleEdit(index, row) {
+    handleEdit(index, row) {
       console.log(index, row);
       this.selectData = row;
-      this.taskId = row.id;
+      this.getTask(row.id);
       this.dialogVisible = true;
       this.$nextTick(function () {
         this.$refs.update.init();
@@ -142,9 +149,27 @@ export default {
       this.tableData = res.data.data.rows;
       this.totalCount = res.data.data.count;
     },
-    async onSubmit() {
+    async getUserList() {
+      let res = await getUserListApi({ pagination: false });
+      console.log(res);
+      this.users = res.data.data.data.rows;
+      console.log(this.users);
+    },
+    async getTask(taskId) {
+      let res = await taskReleaseApi({
+        userIds: this.params,
+        taskId,
+      });
+      if (res.data.status == 1) {
+        this.taskList();
+      }
+    },
+
+    async onSubmit(form) {
+      this.params = form.userIds;
       let id = this.selectData.id;
       let option = this.$refs.update.form;
+      console.log(this.$refs.update);
       let res = await TaskUpdateApi({
         id: id,
         name: option.name,
