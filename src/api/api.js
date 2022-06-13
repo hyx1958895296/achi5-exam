@@ -235,5 +235,33 @@ export const CreateComment = function(payload = {}) {
      * @returns 
      */
 export const CommentList = function(payload = {}) {
-    return axios.post("/comment/list", payload, postConfig);
+        return axios.post("/comment/list", payload, postConfig);
+    }
+    /**
+     * @description  获取权限列表接口
+     * @param {*} payload.pagination   是否需要分页  是  true  否  false   非必填
+     * @param {*} payload.pageSize   每页获取几条数据  如果不传 默认是获取10条；非必填
+     * @param {*} payload.pageNum  想获取第几页的数据  如果不传 默认是第1页；非必填
+     * @returns 
+     */
+export const permissionListApi = function(payload = {}) {
+        return axios.post("/permission/list", payload, postConfig);
+    }
+    /**
+     * @description  创建权限接口
+     * @param {*} payload.title  <string>    标题
+     * @param {*} payload.type   <number>   类型   1代表左侧栏  2代表页面  3代表功能
+     * @param {*} payload.pid    <number>    pid如果为空就是最大的一级  如果等于某项的id就是它的子级
+     * @returns 
+     */
+export const permissionCreateApi = function(payload = {}) {
+        return axios.post("/permission/create", payload, postConfig);
+    }
+    /**
+     * @description  删除权限接口
+     * @param {*} payload.id  <arr>  // 必填项 权限的id  如果有子级 就把子级跟父级的id都传过来 是一个数组
+     * @returns 
+     */
+export const permissionDeleteApi = function(payload = {}) {
+    return axios.post("/permission/delete", payload, postConfig);
 }

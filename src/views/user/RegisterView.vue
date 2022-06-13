@@ -63,12 +63,9 @@
               v-model="name"
               clearable
             ></el-input>
-            <!-- <div class="flex-center mt-10"> -->
-            <!-- <captchaComponent></captchaComponent> -->
-            <!-- </div> -->
             <div class="mt-10 verification">
               <el-input v-model="captcha"></el-input>
-              <img @click="getCaptcha()" :src="captchaSrc" alt="" />
+              <el-captcha ref="captcha"></el-captcha>
             </div>
             <el-button @click="regJump" type="primary" class="btn mt-20"
               >注册</el-button
@@ -86,9 +83,9 @@
 </template>
 
 <script>
-import { loginApi, registerApi, getCaptchaApi } from "@/api/api";
+import { loginApi, registerApi } from "@/api/api";
 import { encrypt } from "@/assets/utils/util";
-// import captchaComponent from "@/components/captchaComponent.vue";
+import captchaComponent from "@/components/captchaComponent.vue";
 export default {
   data() {
     return {
@@ -107,9 +104,6 @@ export default {
     };
   },
   methods: {
-    // next() {
-    //   if (this.active++ > 2) this.active = 1;
-    // },
     getValidateResult() {
       if (/(\W)/.test(this.username)) {
         this.$message({
@@ -176,16 +170,9 @@ export default {
         });
       }
     },
-    // changeVal(val) {
-    //   this.captcha = val;
-    // },
   },
-  // components: {
-  //   captchaComponent,
-  // },
-  getCaptcha() {
-    //这里面有一个缓存的概念
-    this.captchaSrc = getCaptchaApi();
+  components: {
+    "el-captcha": captchaComponent,
   },
 };
 </script>
@@ -226,27 +213,6 @@ export default {
           vertical-align: middle;
         }
       }
-
-      // & .req {
-      //   display: flex;
-      //   justify-content: flex-start;
-      //   align-items: center;
-      //   font-size: 14px;
-      //   & .stat {
-      //     width: 20px;
-      //     margin-top: 10px;
-      //     color: #ff4400;
-      //   }
-      // }
-      // & .verifc {
-      //   display: grid;
-      //   grid-template-columns: 0.35fr 2fr 1.8fr;
-      //   & .stat {
-      //     width: 20px;
-      //     margin-top: 10px;
-      //     color: #ff4400;
-      //   }
-      // }
       & .btn {
         width: 100%;
         font-size: 18px;

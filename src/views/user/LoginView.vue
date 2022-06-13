@@ -17,7 +17,7 @@
         </div>
         <div class="mt-10 verification">
           <el-input v-model="captcha"></el-input>
-          <img @click="getCaptcha()" :src="captchaSrc" alt="" />
+          <el-captcha ref="captcha"></el-captcha>
         </div>
         <div class="flex-between jump mt-10">
           <div class="lost-password">忘记密码</div>
@@ -99,7 +99,7 @@
 }
 </style>
 <script>
-// import captchaComponent from "@/components/captchaComponent.vue";
+import captchaComponent from "@/components/captchaComponent.vue";
 import { loginApi, getCaptchaApi } from "@/api/api";
 import { encrypt } from "@/assets/utils/util";
 export default {
@@ -108,14 +108,12 @@ export default {
       username: "",
       password: "",
       captcha: "",
-      captchaSrc: "/api/captcha",
     };
   },
+  components: {
+    "el-captcha": captchaComponent,
+  },
   methods: {
-    //检查用户名和密码，如果校验成功，返回true，检验失败，返回false
-    // changeVal(val) {
-    //   this.captcha = val;
-    // },
     getValidateResult() {
       var res = {
         result: true,
@@ -147,9 +145,9 @@ export default {
 
       const { username, password, captcha } = this;
       let res = await loginApi({
-        username: this.username,
-        password: encrypt(this.password),
-        captcha: this.captcha,
+        username: username,
+        password: encrypt(password),
+        captcha: captcha,
       });
       //登录成功
       if (res.data.status == 1) {
@@ -167,15 +165,9 @@ export default {
         });
         this.getCaptcha();
       }
-    },
-    getCaptcha() {
-      //这里面有一个缓存的概念
-      this.captchaSrc = getCaptchaApi();
+      this.$refs.captcha.getCaptcha();
     },
   },
-  // components: {
-  //   captchaComponent,
-  // },
 
   mounted() {
     //绑定监听事件
