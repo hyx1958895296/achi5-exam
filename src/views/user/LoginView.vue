@@ -100,7 +100,7 @@
 </style>
 <script>
 import captchaComponent from "@/components/captchaComponent.vue";
-import { loginApi, getCaptchaApi } from "@/api/api";
+import { loginApi } from "@/api/api";
 import { encrypt } from "@/assets/utils/util";
 export default {
   data() {
@@ -163,9 +163,8 @@ export default {
           type: "warning",
           message: res.data.msg,
         });
-        this.getCaptcha();
+        this.$refs.captcha.getCaptcha();
       }
-      this.$refs.captcha.getCaptcha();
     },
   },
 

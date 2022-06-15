@@ -37,14 +37,12 @@
                   <i class="el-icon-location"></i>
                   <span>{{ item.groupName }}</span>
                 </template>
-                <el-menu-item-group
+                <el-menu-item
                   :index="children.key"
                   v-for="children in item.children"
-                  :key="children.key"
-                >
-                  <el-menu-item index="1-1">选项1</el-menu-item>
-                  <el-menu-item index="1-2">选项2</el-menu-item>
-                </el-menu-item-group>
+                  :key="children.id"
+                  >{{ children.roleName }}
+                </el-menu-item>
               </el-submenu>
             </el-menu>
           </div>
@@ -62,238 +60,59 @@
                 设置角色对应的功能操作，应用管理，后台管理权限
               </div>
               <el-tab-pane label="角色成员" name="first" class="tabs-style">
-                <div class="custom-tree-container">
-                  <div class="block">
-                    <el-tree
-                      :data="data"
-                      show-checkbox
-                      node-key="id"
-                      default-expand-all
-                      :expand-on-click-node="false"
-                    >
-                      <span class="custom-tree-node" slot-scope="{ data }">
-                        <span>{{ data.title }}</span>
-                        <span>
-                          <el-button
-                            type="text"
-                            size="mini"
-                            @click="dialogVisibleTrue(data.id)"
-                          >
-                            Append
-                          </el-button>
-                          <el-button
-                            type="text"
-                            size="mini"
-                            @click="remove(data)"
-                          >
-                            Delete
-                          </el-button>
-                        </span>
-                      </span>
-                    </el-tree>
-                  </div>
-                </div>
+                sdfjksdjofodjewfed
               </el-tab-pane>
               <el-tab-pane label="功能权限" name="second" class="tabs-style">
                 <div class="second-tab-pane">
-                  <div class="nav">
-                    <div class="flex-just-cont-start">
+                  <div class="parent-model flex mt-20">
+                    <input type="checkBox" />
+                    <div>任务中心</div>
+                  </div>
+                  <div class="children-modle">
+                    <div class="flex mt-10">
                       <input type="checkBox" />
-                      <div class="item ml-5">消息</div>
+                      <div>我的任务</div>
                     </div>
-                    <div class="grid-layout pd-20">
-                      <div>
-                        <div class="flex-center">
-                          <input type="checkBox" />
-                          <div class="item ml-5">消息</div>
-                        </div>
-                        <div class="flex-center">
-                          <input type="checkBox" />
-                          <div class="item ml-5">消息</div>
-                        </div>
-                        <div class="flex-center">
-                          <input type="checkBox" />
-                          <div class="item ml-5">消息</div>
-                        </div>
-                      </div>
-                      <div>
-                        <div class="flex-center">
-                          <input type="checkBox" />
-                          <div class="item ml-5">消息</div>
-                        </div>
-                        <div class="flex-center">
-                          <input type="checkBox" />
-                          <div class="item ml-5">消息</div>
-                        </div>
-                        <div class="flex-center">
-                          <input type="checkBox" />
-                          <div class="item ml-5">消息</div>
-                        </div>
-                      </div>
-                      <div>
-                        <div class="flex-center">
-                          <input type="checkBox" />
-                          <div class="item ml-5">消息</div>
-                        </div>
-                        <div class="flex-center">
-                          <input type="checkBox" />
-                          <div class="item ml-5">消息</div>
-                        </div>
-                        <div class="flex-center">
-                          <input type="checkBox" />
-                          <div class="item ml-5">消息</div>
-                        </div>
-                      </div>
+                    <div class="flex mt-10">
+                      <input type="checkBox" />
+                      <div>创建任务</div>
+                    </div>
+                    <div class="flex mt-10">
+                      <input type="checkBox" />
+                      <div>任务列表</div>
                     </div>
                   </div>
-                  <div class="nav">
-                    <div class="flex-just-cont-start">
+                </div>
+
+                <div class="second-tab-pane">
+                  <div class="parent-model flex mt-20">
+                    <input type="checkBox" />
+                    <div>题库管理</div>
+                  </div>
+                  <div class="children-modle">
+                    <div class="flex mt-10">
                       <input type="checkBox" />
-                      <div class="item ml-5">消息</div>
-                    </div>
-                    <div class="grid-layout pd-20">
-                      <div>
-                        <div class="flex-center">
-                          <input type="checkBox" />
-                          <div class="item ml-5">消息</div>
-                        </div>
-                        <div class="flex-center">
-                          <input type="checkBox" />
-                          <div class="item ml-5">消息</div>
-                        </div>
-                        <div class="flex-center">
-                          <input type="checkBox" />
-                          <div class="item ml-5">消息</div>
-                        </div>
-                      </div>
-                      <div>
-                        <div class="flex-center">
-                          <input type="checkBox" />
-                          <div class="item ml-5">消息</div>
-                        </div>
-                        <div class="flex-center">
-                          <input type="checkBox" />
-                          <div class="item ml-5">消息</div>
-                        </div>
-                        <div class="flex-center">
-                          <input type="checkBox" />
-                          <div class="item ml-5">消息</div>
-                        </div>
-                      </div>
-                      <div>
-                        <div class="flex-center">
-                          <input type="checkBox" />
-                          <div class="item ml-5">消息</div>
-                        </div>
-                        <div class="flex-center">
-                          <input type="checkBox" />
-                          <div class="item ml-5">消息</div>
-                        </div>
-                        <div class="flex-center">
-                          <input type="checkBox" />
-                          <div class="item ml-5">消息</div>
-                        </div>
-                      </div>
+                      <div>js题库</div>
                     </div>
                   </div>
-                  <div class="nav">
-                    <div class="flex-just-cont-start">
-                      <input type="checkBox" />
-                      <div class="item ml-5">消息</div>
-                    </div>
-                    <div class="grid-layout pd-20">
-                      <div>
-                        <div class="flex-center">
-                          <input type="checkBox" />
-                          <div class="item ml-5">消息</div>
-                        </div>
-                        <div class="flex-center">
-                          <input type="checkBox" />
-                          <div class="item ml-5">消息</div>
-                        </div>
-                        <div class="flex-center">
-                          <input type="checkBox" />
-                          <div class="item ml-5">消息</div>
-                        </div>
-                      </div>
-                      <div>
-                        <div class="flex-center">
-                          <input type="checkBox" />
-                          <div class="item ml-5">消息</div>
-                        </div>
-                        <div class="flex-center">
-                          <input type="checkBox" />
-                          <div class="item ml-5">消息</div>
-                        </div>
-                        <div class="flex-center">
-                          <input type="checkBox" />
-                          <div class="item ml-5">消息</div>
-                        </div>
-                      </div>
-                      <div>
-                        <div class="flex-center">
-                          <input type="checkBox" />
-                          <div class="item ml-5">消息</div>
-                        </div>
-                        <div class="flex-center">
-                          <input type="checkBox" />
-                          <div class="item ml-5">消息</div>
-                        </div>
-                        <div class="flex-center">
-                          <input type="checkBox" />
-                          <div class="item ml-5">消息</div>
-                        </div>
-                      </div>
-                    </div>
+                </div>
+                <div class="second-tab-pane">
+                  <div class="parent-model flex mt-20">
+                    <input type="checkBox" />
+                    <div>任务中心</div>
                   </div>
-                  <div class="nav">
-                    <div class="flex-just-cont-start">
+                  <div class="children-modle">
+                    <div class="flex mt-10">
                       <input type="checkBox" />
-                      <div class="item ml-5">消息</div>
+                      <div>我的任务</div>
                     </div>
-                    <div class="grid-layout pd-20">
-                      <div>
-                        <div class="flex-center">
-                          <input type="checkBox" />
-                          <div class="item ml-5">消息</div>
-                        </div>
-                        <div class="flex-center">
-                          <input type="checkBox" />
-                          <div class="item ml-5">消息</div>
-                        </div>
-                        <div class="flex-center">
-                          <input type="checkBox" />
-                          <div class="item ml-5">消息</div>
-                        </div>
-                      </div>
-                      <div>
-                        <div class="flex-center">
-                          <input type="checkBox" />
-                          <div class="item ml-5">消息</div>
-                        </div>
-                        <div class="flex-center">
-                          <input type="checkBox" />
-                          <div class="item ml-5">消息</div>
-                        </div>
-                        <div class="flex-center">
-                          <input type="checkBox" />
-                          <div class="item ml-5">消息</div>
-                        </div>
-                      </div>
-                      <div>
-                        <div class="flex-center">
-                          <input type="checkBox" />
-                          <div class="item ml-5">消息</div>
-                        </div>
-                        <div class="flex-center">
-                          <input type="checkBox" />
-                          <div class="item ml-5">消息</div>
-                        </div>
-                        <div class="flex-center">
-                          <input type="checkBox" />
-                          <div class="item ml-5">消息</div>
-                        </div>
-                      </div>
+                    <div class="flex mt-10">
+                      <input type="checkBox" />
+                      <div>创建任务</div>
+                    </div>
+                    <div class="flex mt-10">
+                      <input type="checkBox" />
+                      <div>任务列表</div>
                     </div>
                   </div>
                 </div>
@@ -308,51 +127,21 @@
         </el-main>
       </el-container>
     </el-container>
-    <el-dialog title="创建权限" :visible.sync="dialogFormVisible">
-      <el-form :model="form">
-        <el-form-item label="标题" :label-width="formLabelWidth">
-          <el-input v-model="form.title" autocomplete="off"></el-input>
-        </el-form-item>
-        <el-form-item label="类型" :label-width="formLabelWidth">
-          <el-input v-model="form.type" autocomplete="off"></el-input>
-        </el-form-item>
-      </el-form>
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">取 消</el-button>
-        <el-button type="primary" @click="permissionCreate()">确 定</el-button>
-      </div>
-    </el-dialog>
   </div>
 </template>
 
 <script>
-import {
-  RoleGroupListApi,
-  RoleListApi,
-  permissionListApi,
-  permissionCreateApi,
-  permissionDeleteApi,
-} from "@/api/api";
+import { RoleGroupListApi, RoleListApi } from "@/api/api";
 export default {
   data() {
     return {
       activeName: "",
       defaultActive: "",
       menu: [],
-      data: [],
-      id: "",
-      ids: [],
-      dialogFormVisible: false,
-      form: {
-        title: "",
-        type: "",
-      },
-      formLabelWidth: "120px",
     };
   },
   created() {
     this.getMenuList();
-    this.getPromissionList();
   },
   methods: {
     handleOpen(key, keyPath) {
@@ -364,88 +153,15 @@ export default {
     handleClick(tab, event) {
       console.log(tab, event);
     },
-
-    async getPromissionList() {
-      let res = await permissionListApi({ pagination: false });
-      let list = res.data.data.rows;
-      list.forEach(
-        (item) =>
-          (item.children = list.filter((childItem) => childItem.pid == item.id))
-      );
-      this.data = list.filter((item) => !item.pid);
-      console.log(res);
-      // this.ids.push(list.id);
-      // if(!list.children ) return
-      //   list.children.forEach(item=>{
-      //     getPromissionList(item);
-      //   })
-    },
-    dialogVisibleTrue(id) {
-      this.id = id;
-      this.dialogFormVisible = true;
-    },
-    async permissionCreate() {
-      let res = await permissionCreateApi({
-        title: this.form.title,
-        type: this.form.type,
-        pid: this.pid,
-      });
-      console.log(res);
-      this.dialogFormVisible = false;
-      this.getPromissionList();
-    },
-    remove(data) {
-      // console.log(node);
-      this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning",
-      })
-        .then(() => {
-          let ids = this.getSelectedIds(data);
-          this.getPermissionDelete(ids);
-          this.$message({
-            type: "success",
-            message: "删除成功!",
-          });
-        })
-        .catch((err) => {
-          console.log(err);
-          this.$message({
-            type: "info",
-            message: "已取消删除",
-          });
-        });
-    },
-    getSelectedIds(data) {
-      let res = [data.id];
-      data.children.forEach((item) => {
-        if (item.children.length) {
-          let ids = this.getSelectedIds(item);
-          if (ids.length) res.push(...ids);
-        }
-        res.push(item.id);
-      });
-      return res;
-    },
-    async getPermissionDelete(id) {
-      let res = await permissionDeleteApi({
-        id,
-      });
-      if (res.data.status == 1) {
-        this.getPromissionList();
-      }
-    },
     async getMenuList() {
       let [roleListResult, roleGroupListResult] = await Promise.all([
-        RoleGroupListApi(),
         RoleListApi(),
+        RoleGroupListApi(),
       ]);
       let roleList = roleListResult.data.data.rows;
       let roleGroupList = roleGroupListResult.data.data.rows;
       roleGroupList.forEach((group) => {
         group.key = `group${group.id}`;
-
         group.children = (() => {
           let res = [];
           roleList.forEach((role) => {
@@ -457,9 +173,8 @@ export default {
           return res;
         })();
       });
-      console.log(roleGroupList);
       this.menu = roleGroupList;
-      // this.defaultActive = roleGroupList[0].children[0].key;
+      this.defaultActive = roleGroupList[0].children[0].key;
     },
   },
 };
@@ -517,12 +232,8 @@ export default {
   align-items: center;
   justify-content: flex-start;
 }
-.custom-tree-node {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 14px;
-  padding-right: 8px;
+.children-modle {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
 }
 </style>

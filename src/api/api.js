@@ -263,5 +263,35 @@ export const permissionCreateApi = function(payload = {}) {
      * @returns 
      */
 export const permissionDeleteApi = function(payload = {}) {
-    return axios.post("/permission/delete", payload, postConfig);
+        return axios.post("/permission/delete", payload, postConfig);
+    }
+    /**
+     * @description  修改权限接口
+     * @param {*} payload.id     <number>    id
+     * @param {*} payload.title  <string>    标题
+     * @param {*} payload.type   <number>    类型   1代表左侧栏  2代表页面  3代表功能
+     * @param {*} payload.pid    <number>    pid如果为空就是最大的一级  如果等于某项的id就是它的子级
+     * @returns 
+     */
+export const permissionUpdateApi = function(payload = {}) {
+        return axios.post("/permission/update", payload, postConfig);
+    }
+    /**
+     * @description  创建权限 
+     * @param {*} payload.title      [<string>], //选择的那个功能权限名称
+     * @param {*} payload.rId        <number>  //角色的id
+     * @returns 
+     */
+export const getRolePromissionCreateApi = function(payload = {}) {
+        return axios.post("/rolePermission/create", payload, postConfig);
+    }
+    /**
+     * @description  获取功能权限列表 
+     * @param {*} payload.pagination   是否需要分页  是  true  否  false   非必填
+     * @param {*} payload.pageSize   每页获取几条数据  如果不传 默认是获取10条；非必填
+     * @param {*} payload.pageNum  想获取第几页的数据  如果不传 默认是第1页；非必填
+     * @returns 
+     */
+export const getRolePromissionListApi = function(payload = {}) {
+    return axios.post("/rolePermission/list", payload, postConfig);
 }

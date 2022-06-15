@@ -38,6 +38,7 @@
       <el-container>
         <el-aside style="width: 220px">
           <el-menu
+            unique-opened="true"
             default-active="1"
             class="el-menu-vertical-demo"
             background-color="#0b1b34"
@@ -107,6 +108,9 @@
                 <el-menu-item index="3-7" @click="$navigator('rolemanager')"
                   >权限管理</el-menu-item
                 >
+                <el-menu-item index="3-8" @click="$navigator('managerview')"
+                  >Tree属性控件</el-menu-item
+                >
               </el-menu-item-group>
             </el-submenu>
             <el-menu-item index="2" @click="$navigator('shengview')">
@@ -172,6 +176,12 @@
     margin: 0 auto;
     padding: 0;
   }
+  .clear-style {
+    background-color: white;
+  }
+}
+::-webkit-scrollbar {
+  width: 0px;
 }
 </style>
 

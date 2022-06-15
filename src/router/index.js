@@ -78,6 +78,12 @@ const routes = [{
                 component: () =>
                     import ( /* webpackChunkName: "shengview" */ '../views/ShengView.vue'),
             },
+            {
+                path: '/managerview',
+                name: 'managerview',
+                component: () =>
+                    import ( /* webpackChunkName: "managerview" */ '../views/TaskCenter/ManagerView.vue'),
+            },
         ]
     },
     {
