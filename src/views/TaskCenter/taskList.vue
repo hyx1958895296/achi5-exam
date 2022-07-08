@@ -44,7 +44,13 @@
             >
               编辑任务
             </el-button>
-            <el-button type="text" size="small"> </el-button>
+            <el-button
+              type="text"
+              size="small"
+              @click="getTaskDeatil(scope.row.id)"
+            >
+              任务详情
+            </el-button>
             <el-button
               type="text"
               size="small"
@@ -89,6 +95,7 @@ import {
   taskReleaseApi,
   TaskUpdateApi,
   getUserListApi,
+  TaskDetailApi,
 } from "@/api/api";
 import taskForm from "@/components/taskFormComponent.vue";
 import formatDate from "@/mixins/formatDate";
@@ -107,7 +114,7 @@ export default {
       selectData: "",
       userIdAll: [],
       params: [],
-      taskId:""
+      taskId: "",
     };
   },
   created() {
@@ -165,6 +172,13 @@ export default {
       }
     },
 
+    async getTaskDeatil(taskId) {
+      let res = await TaskDetailApi({
+        taskId,
+      });
+      // const taskId = sessionStorage.setItem("taskId", taskId);
+      console.log(res);
+    },
     async onSubmit(form) {
       this.params = form.userIds;
       let id = this.selectData.id;

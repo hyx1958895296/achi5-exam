@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0 auto;
+            padding: 0px;
+        }
+        
+        .header {
+            display: grid;
+            grid-template-columns: 1fr 4fr 1fr;
+            background-color: red;
+            padding: 8px 0px;
+        }
+        
+        .container {
+            height: calc(100vh - 16px -20px);
+            background-color: aqua;
+        }
+        
+        .footer {
+            width: 100%;
+            position: fixed;
+            bottom: 0px;
+            background-color: rgb(246, 246, 246);
+            padding: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="header">
+            <div>toubu</div>
+            <div>搜索</div>
+            <div>右边</div>
+        </div>
+        <div class="container">
+
+        </div>
+        <div class="footer">
+            <div src="../assets/jdlogo.png" height="50px" alt="">
+                <img src="" alt="">
+            </div>
+            <div src="../assets/jd2.png" height="50px" alt="">
+
+            </div>
+            <div src="../assets/jd3.png" height="50px" alt="">
+
+            </div>
+            <div src="../assets/jd4.png" height="50px" alt="">
+
+            </div>
+            <div src="../assets/jd5.png" height="50px" alt="">
+
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    var app = Vue.createApp({
+        data() {
+            return {
+                username: 'askdfhj'
+            }
+        }
+    })
+</script>
+
+</html>

@@ -49,6 +49,12 @@ const routes = [{
                     import ( /* webpackChunkName: "taskList" */ '../views/TaskCenter/taskList.vue'),
             },
             {
+                path: '/SetAvatar',
+                name: 'setavatar',
+                component: () =>
+                    import ( /* webpackChunkName: "setavatar" */ '../views/TaskCenter/SetAvatar.vue'),
+            },
+            {
                 path: '/roleList',
                 name: 'roleList',
                 component: () =>

@@ -25,8 +25,9 @@
               <div class="ml-5">新建分组</div>
             </div>
           </div>
-          <div class="aside-bottom">
+          <div>
             <el-menu
+              unique-opened
               :default-active="defaultActive"
               class="el-menu-vertical-demo"
               @open="handleOpen"
@@ -131,7 +132,7 @@
 </template>
 
 <script>
-import { RoleGroupListApi, RoleListApi } from "@/api/api";
+import { mapActions } from 'vuex';
 export default {
   data() {
     return {
@@ -144,6 +145,7 @@ export default {
     this.getMenuList();
   },
   methods: {
+    ...mapActions(['getRoleGroupMenuList']),
     handleOpen(key, keyPath) {
       console.log(key, keyPath);
     },
@@ -154,27 +156,8 @@ export default {
       console.log(tab, event);
     },
     async getMenuList() {
-      let [roleListResult, roleGroupListResult] = await Promise.all([
-        RoleListApi(),
-        RoleGroupListApi(),
-      ]);
-      let roleList = roleListResult.data.data.rows;
-      let roleGroupList = roleGroupListResult.data.data.rows;
-      roleGroupList.forEach((group) => {
-        group.key = `group${group.id}`;
-        group.children = (() => {
-          let res = [];
-          roleList.forEach((role) => {
-            if (role.groupId == group.id) {
-              role.key = `role${role.id}`;
-              res.push(role);
-            }
-          });
-          return res;
-        })();
-      });
-      this.menu = roleGroupList;
-      this.defaultActive = roleGroupList[0].children[0].key;
+      this.menu = await this.getRoleGroupMenuList();
+      this.defaultActive = this.menu[0].children[0].key;
     },
   },
 };
@@ -198,9 +181,6 @@ export default {
 }
 .aside-top {
   padding: 20px;
-}
-.aside-bottom {
-  height: 100vh;
 }
 .col-blue {
   color: #4c8edd;

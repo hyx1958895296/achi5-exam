@@ -127,6 +127,7 @@ export default {
         nameInp: "",
         sex: "",
         phoneInp: "",
+        avatarImg: "",
         emailInp: "",
         textarea: "",
         proviceCode: "", //省编号
@@ -161,6 +162,7 @@ export default {
         email: this.information.emailInp,
         sex: this.information.sex,
         avatarName: this.information.accountInp,
+        // avatarImg,
         name: this.information.nameInp,
         provinceNo: this.information.proviceCode,
         cityNo: this.information.cityCode,

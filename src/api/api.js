@@ -293,5 +293,17 @@ export const getRolePromissionCreateApi = function(payload = {}) {
      * @returns 
      */
 export const getRolePromissionListApi = function(payload = {}) {
-    return axios.post("/rolePermission/list", payload, postConfig);
+        return axios.post("/rolePermission/list", payload, postConfig);
+    }
+    /**
+     * 上传功能
+     */
+export const uploadImageApi = function(payload = {}) {
+        return axios.post("/upload/image", payload, postConfig);
+    }
+    /**
+     * 
+     */
+export const avatarListApi = function(payload = {}) {
+    return axios.post("/avatar/list", payload, postConfig);
 }
