@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import LoginView from '../views/user/LoginView.vue'
-import AboutView from '../views/questionBank/AboutView.vue'
+import AboutView from '../views/BrushQuestionSystem/AboutView.vue'
 Vue.use(VueRouter)
 
 const routes = [{
@@ -35,6 +35,36 @@ const routes = [{
                 name: 'worker',
                 component: () =>
                     import ( /* webpackChunkName: "worker" */ '../views/AccountSetting/Worker.vue'),
+            },
+            {
+                path: '/questionBankListView',
+                name: 'questionbanklistview',
+                component: () =>
+                    import ( /* webpackChunkName: "worker" */ '../views/BrushQuestionSystem/questionBankListView.vue'),
+            },
+            {
+                path: '/createQuestionView',
+                name: 'createquestionview',
+                component: () =>
+                    import ( /* webpackChunkName: "worker" */ '../views/BrushQuestionSystem/createQuestionView.vue'),
+            },
+            {
+                path: '/deleteQuestionView',
+                name: 'deletequestionview',
+                component: () =>
+                    import ( /* webpackChunkName: "worker" */ '../views/BrushQuestionSystem/deleteQuestionView.vue'),
+            },
+            {
+                path: '/updateQuestionView',
+                name: 'updatequestionview',
+                component: () =>
+                    import ( /* webpackChunkName: "worker" */ '../views/BrushQuestionSystem/updateQuestionView.vue'),
+            },
+            {
+                path: '/questionDetailView',
+                name: 'questiondetailview',
+                component: () =>
+                    import ( /* webpackChunkName: "worker" */ '../views/BrushQuestionSystem/questionDetailView.vue'),
             },
             {
                 path: '/taskCreate',

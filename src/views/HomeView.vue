@@ -18,7 +18,7 @@
               <span class="wind-power ml-5">风力 112级</span>
               <span class="wind-direction ml-5">风向 北风</span>
             </div>
-            <div class="align-center">
+            <div class="align-center avatar-and-name">
               <el-avatar
                 :size="50"
                 :src="circleUrl"
@@ -71,9 +71,33 @@
                 <span slot="title">刷题系统</span>
               </template>
               <el-menu-item-group>
-                <el-menu-item index="1-1">HTML题库</el-menu-item>
-                <el-menu-item index="1-1">HTML题库</el-menu-item>
-                <el-menu-item index="1-1">HTML题库</el-menu-item>
+                <el-menu-item
+                  index="2-1"
+                  @click="$navigator('questionbanklistview')"
+                  >题库列表</el-menu-item
+                >
+                <el-menu-item
+                  index="2-2"
+                  @click="$navigator('createquestionview')"
+                  >创建题</el-menu-item
+                >
+                <el-menu-item
+                  index="2-3"
+                  @click="$navigator('deletequestionview')"
+                  >删除题</el-menu-item
+                >
+                <el-menu-item
+                  index="2-4"
+                  @click="$navigator('updatequestionview')"
+                  >修改题</el-menu-item
+                >
+                <el-menu-item
+                  index="2-5"
+                  @click="$navigator('questiondetailview')"
+                  >题目详情</el-menu-item
+                >
+                <!-- <el-menu-item index="2-4" @click="$navigator('shengview')"></el-menu-item>
+                <el-menu-item index="2-5" @click="$navigator('shengview')"></el-menu-item> -->
               </el-menu-item-group>
             </el-submenu>
             <el-submenu index="3">
@@ -149,7 +173,8 @@
     line-height: 60px;
     & .header-content {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1.2fr;
+      min-width: 1150px;
       & .header-title-left {
         font-size: 16px;
         padding: 0 40px;
@@ -160,6 +185,9 @@
       }
       & .header-right {
         height: 60px;
+        & .avatar-and-name {
+          width: 150px;
+        }
         & .aa {
           display: flex;
           align-items: center;
